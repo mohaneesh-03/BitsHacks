@@ -1,0 +1,35 @@
+# Base URL for easier testing (optional)
+@baseUrl = http://localhost:5000/api
+
+### 1. Create a Hackathon
+POST {{baseUrl}}/hackathons/create
+Content-Type: application/json
+
+{
+  "name": "AI Hackathon",
+  "description": "A hackathon focused on AI projects",
+  "startDate": "2024-12-01T10:00:00Z",
+  "endDate": "2024-12-02T18:00:00Z",
+  "rules": "Build an innovative AI solution",
+  "prizes": "$5000",
+  "status": "Open"
+}
+
+### 2. Get All Hackathons
+GET {{baseUrl}}/hackathons
+
+### 3. Create a Team
+POST {{baseUrl}}/teams/create
+Content-Type: application/json
+
+{
+  "hackathonId": "672e0568d306f1b85c00fa6c",
+  "teamName": "Team Innovators",
+  "members": [
+    { "name": "Alice", "linkedin": "https://linkedin.com/in/alice" },
+    { "name": "Bob", "linkedin": "https://linkedin.com/in/bob" }
+  ]
+}
+
+### 4. Get Teams for a Hackathon
+GET {{baseUrl}}/teams/672e0568d306f1b85c00fa6c
