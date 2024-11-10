@@ -2,10 +2,9 @@ const mongoose = require('mongoose');
 
 const hackathonSchema = new mongoose.Schema({
   name: String,
-  description: String,
-  startDate: Date,
-  endDate: Date,
-  rules: String,
+  duration: String,
+  type: String,
+  teamsize: String,
   prizes: String,
   status: { type: String, enum: ['Open', 'Closed', 'Ongoing'], default: 'Open' }
 });

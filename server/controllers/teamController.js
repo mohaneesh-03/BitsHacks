@@ -5,7 +5,7 @@ exports.createTeam = async (req, res) => {
   try {
     const team = new Team(req.body);
     await team.save();
-    res.status(201).json(team);
+    res.status(201).json({message: "succesfful", team});
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
