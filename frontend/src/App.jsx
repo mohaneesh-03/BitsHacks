@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login  from './components/login';
+import Login  from './components/Login';
 import OrganizerDashboard from './components/OrganizerDashboard';
 import StudentDashboard from './components/StudentDashboard';
 import JoinOrCreateTeam from './components/JoinOrCreateTeam';
@@ -13,10 +13,10 @@ function App() {
   const [userType, setUserType] = useState('');
 
   return (
-    <Router>
       <div className="App">
-        <Routes>
-          <Route path="/" element={<Login setUserType={setUserType} />} />
+        <Login setUserType={setUserType}/>
+        {/* <Routes>
+          <Route path="/app" element={<Login setUserType={setUserType} />} />
           {userType === 'organizer' && (
             <Route path="/organizer" element={<OrganizerDashboard />} />
           )}
@@ -27,9 +27,8 @@ function App() {
           <Route path="/student/:studentid" element={<StudentDashboard />} />
           <Route path="/hackathon/:eventId" element={<JoinOrCreateTeam />} />
           <Route path="/register/:eventId" element={<RegisterEvent />} />
-        </Routes>
+        </Routes> */}
       </div>
-    </Router>
   )
 }
 

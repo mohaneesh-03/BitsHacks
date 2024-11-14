@@ -1,4 +1,6 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes, FaFacebook, FaTwitter, FaLinkedin, FaInstagram, FaPhone, FaEnvelope,FaPlus,FaMinus } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import './App.css';
@@ -11,7 +13,6 @@ import howItWorksImage from './assets/how-it-works-image.jpeg';
 import faqHelpCenterImage from './assets/faq-help-center-image.jpeg';
 import blogsResourcesImage from './assets/blogs-resources-image.jpeg';
 import contactUsImage from './assets/contact-us-image.jpeg';
-import { useNavigate } from 'react-router-dom';
 
 const sections = [
   { id: 'home', text: 'Home' },
@@ -58,12 +59,6 @@ const LandingPage = () => {
       setActiveQuestion(index); // Open new answer
     }
   };
-  const navigate = useNavigate(); // <-- Initialize useNavigate here
-
-  // Function to handle the login button click
-  const handleLoginClick = () => {
-    navigate('/'); // Redirect to the Login route
-  };
   
   return (
     <div className="relative text-white font-sans min-h-screen scroll-smooth">
@@ -87,12 +82,7 @@ const LandingPage = () => {
               isActive={activeSection === section.id}
             />
           ))}
-          <button
-            onClick={handleLoginClick}
-            className="bg-yellow-300 text-indigo-900 px-4 py-2 rounded-md shadow-lg"
-          >
-            Login
-          </button>
+          <NavLink text="Login" highlight />
         </nav>
       </header>
 
@@ -107,7 +97,7 @@ const LandingPage = () => {
               isActive={activeSection === section.id}
             />
           ))}
-          {/* <button onClick={()=>navigate('/')}>Login</button> */}
+          <NavLink text="Login" highlight />
         </div>
       )}
       <motion.section
@@ -329,14 +319,42 @@ const LandingPage = () => {
 };
 
 // NavLink Component with active state style
-const NavLink = ({ id, text, isActive, highlight }) => (
-  <a
-    href={`#${id}`}
-    className={`text-lg p-2 rounded transition-all duration-300 ease-in-out hover:bg-yellow-300 hover:text-indigo-900 ${isActive ? 'bg-yellow-300 text-indigo-900 font-bold' : ''} ${highlight ? 'bg-yellow-300 text-indigo-900 px-4 py-2 rounded-md shadow-lg' : ''}`}
-  >
-    {text}
-  </a>
-);
+const NavLink = ({ id, text, isActive, highlight }) => {
+  const navigate = useNavigate();
+
+  // Handle navigation for the "Login" button
+  const handleClick = () => {
+    if (text === "Login") {
+      navigate('/app');
+    }
+  };
+
+  // Conditional rendering for the "Login" button
+  if (text === "Login") {
+    return (
+      <button
+        onClick={handleClick}
+        className={`text-lg p-2 rounded transition-all duration-300 ease-in-out hover:bg-yellow-300 hover:text-indigo-900 ${
+          highlight ? 'bg-yellow-300 text-indigo-900 px-4 py-2 rounded-md shadow-lg' : ''
+        }`}
+      >
+        {text}
+      </button>
+    );
+  }
+
+  // For other links, render as usual with anchor tags
+  return (
+    <a
+      href={`#${id}`}
+      className={`text-lg p-2 rounded transition-all duration-300 ease-in-out hover:bg-yellow-300 hover:text-indigo-900 ${
+        isActive ? 'bg-yellow-300 text-indigo-900 font-bold' : ''
+      } ${highlight ? 'bg-yellow-300 text-indigo-900 px-4 py-2 rounded-md shadow-lg' : ''}`}
+    >
+      {text}
+    </a>
+  );
+};
 
 // Section Component
 const Section = ({ id, title, content, additionalContent, image, bgColor, children, imageLeft }) => (
